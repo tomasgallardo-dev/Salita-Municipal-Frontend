@@ -1,0 +1,58 @@
+{
+    "success": true,
+    "timestamp": "2026-08-11T23:36:43.541Z",
+    "message": "Pacientes obtenidos exitosamente",
+    "total": 2,
+    "data": [
+        {
+            "nombre": "NICK",
+            "dni": "43140412",
+            "fechaNacimiento": "1996-12-10T00:00:00.000Z",
+            "sexo": "Masculino",
+            "direccion": {
+                "calle": "AV. 844",
+                "numero": "2600",
+                "ciudad": "San francisco Solano",
+                "provincia": "Buenos Aires"
+            },
+            "telefono": {
+                "codpais": "+54",
+                "codigoArea": "11",
+                "numero": "53534460"
+            },
+            "correoelectronico": "Nickdgt@email.com",
+            "historialMedico": {
+                "obraSocial": "MEDIFE",
+                "numAfiliado": "187652320",
+                "consultas": []
+            },
+            "_id": "6a7bb2099111acdb443efdf1",
+            "__v": 0
+        },
+        {
+            "nombre": "MARIA LOPEZ",
+            "dni": "38999888",
+            "fechaNacimiento": "1990-05-20T00:00:00.000Z",
+            "sexo": "Femenino",
+            "direccion": {
+                "calle": "SAN MARTIN",
+                "numero": "1500",
+                "ciudad": "Goya",
+                "provincia": "Corrientes"
+            },
+            "telefono": {
+                "codpais": "+54",
+                "codigoArea": "3777",
+                "numero": "4123456"
+            },
+            "correoelectronico": "maria.lopez@email.com",
+            "historialMedico": {
+                "obraSocial": "OSDE",
+                "numAfiliado": "998877665",
+                "consultas": []
+            },
+            "_id": "6a7bb2099111acdb443efdf2",
+            "__v": 0
+        }
+    ]
+}

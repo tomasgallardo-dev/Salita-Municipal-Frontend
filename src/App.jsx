@@ -1,14 +1,14 @@
 import Header from './components/Header'
-import PacienteCard from './components/PacienteCard'
-import './App.css'
+import DashboardRecepcion from './pages/DashboardRecepcion'
+import FormularioPaciente from './components/pacientes/FormularioPaciente'
 
 function App() {
-  
 
   return (
     <>
       <Header />
-      <PacienteCard nombre= "fulanito" obraSocial="PAMI" dni="12234456" direccion="lugar 123"/>
+      <DashboardRecepcion />
+      <FormularioPaciente />
     </>
   )
 }

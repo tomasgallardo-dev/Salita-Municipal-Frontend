@@ -1,0 +1,133 @@
+// Paleta consistente con el formulario (gris moderno)
+$color-primario: #4361ee;
+$color-exito: #2a9d8f;
+$color-espera: #f4a261;
+$color-fondo-card: #ffffff;
+$color-borde: #e9ecef;
+
+// Contenedor general de la seccion
+.dashboard {
+    padding-top: 10px;
+}
+
+//Turnos del dia 
+.titulo {
+    color: #212529;
+    font-weight: 700;
+}
+
+//Barra de busqueda
+.buscador {
+    position: relative;
+
+    input {
+        border-radius: 30px;
+        padding-left: 40px;
+        border: 1px solid $color-borde;
+        transition: box-shadow 0.2s;
+
+        &:focus {
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+            border-color: $color-primario;
+        }
+    }
+
+    //icono de la lupa 
+    &::before {
+        content: "🔍";
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 14px;
+        opacity: 0.5;
+    }
+}
+
+//Tarjeta de turno
+.tarjetaTurno {
+    border: none;
+    border-radius: 10px;
+    border-left: 5px solid $color-espera;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    background-color: $color-fondo-card;
+    transition: transform 0.15s, box-shadow 0.15s;
+    overflow: hidden; // Añadido para que el texto no se salga del borde blanco
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1); 
+    }
+}
+
+//Variante cuando el turno YA fue atendido: cambia el color del borde
+.tarjetaAtendida {
+    border-left-color: $color-exito;
+}
+
+// Fila con avatar + nombre
+.encabezadoCard {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px; // Da un poco de aire antes de los botones
+}
+
+// Círculo con las iniciales del paciente
+.avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: $color-primario;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    flex-shrink: 0; // evita que se achique si el nombre es largo
+}
+
+
+/* ========================================================
+   NUEVAS CLASES AGREGADAS PARA ORDENAR LOS TEXTOS
+======================================================== */
+
+// Columna donde van el nombre, la especialidad y la hora
+.infoPaciente {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; // Fundamental para que los textos respeten el ancho
+}
+
+// Título del paciente
+.nombrePaciente {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 2px;
+    color: #1e293b;
+    white-space: nowrap; // Obliga al texto a estar en una sola línea
+    overflow: hidden;
+    text-overflow: ellipsis; // Si el nombre es larguísimo, pone "..."
+}
+
+// Especialidad y nombre del médico
+.especialidad {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 4px;
+    text-transform: capitalize; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+// Piso 2 de la tarjeta (Donde va el Badge y el Botón)
+.accionesCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid $color-borde; // Una rayita gris súper fina
+    padding-top: 15px;
+    margin-top: auto; 
+}
