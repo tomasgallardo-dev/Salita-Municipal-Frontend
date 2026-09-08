@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useFetch } from "../hooks/useFetch";
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Spinner, Badge } from "react-bootstrap";
 import { toast } from 'sonner';
-import clientesAxios from "../config/axios";
+import clientesAxios from "../config/axios_config";
 
 import BuscadorTurnos from "../components/turnos/BuscadorTurnos";
 import TurnoCard from "../components/turnos/TurnoCard";
@@ -10,63 +10,84 @@ import TurnoCardSkeleton from "../components/turnos/TurnoCardSkeleton";
 
 const DashboardRecepcion = () => {
     const [busqueda, setBusqueda] = useState("");
+    const [filtroFecha, setFiltroFecha] = useState("hoy"); // "hoy" | "proximos" | "todos"
 
     const { data: turnos, setData: setTurnos, isLoading } = useFetch('/turnos');
 
-    const turnosFiltrados = turnos.filter(turno =>
-        turno.pacientes && turno.pacientes.toLocaleLowerCase().includes(busqueda.toLocaleLowerCase())
-    );
-    
+    const hoyString = new Date().toISOString().split('T')[0];
+
+    // Filtrar por nombre
+    const turnosFiltradosPorNombre = turnos.filter(turno => {
+        const nombrePaciente = turno.paciente?.nombre || "";
+        return nombrePaciente.toLocaleLowerCase().includes(busqueda.toLocaleLowerCase());
+    });
+
+    // Filtrar por fecha según el tab seleccionado
+    const turnosFiltrados = turnosFiltradosPorNombre.filter(turno => {
+        if (!turno.fechaTurno) return false;
+        const fechaTurno = new Date(turno.fechaTurno).toISOString().split('T')[0];
+
+        if (filtroFecha === "hoy") return fechaTurno === hoyString;
+        if (filtroFecha === "proximos") return fechaTurno > hoyString;
+        return true; // "todos"
+    });
 
     const marcarAtendido = async (idTurno) => {
-
         try {
             await clientesAxios.patch(`/turnos/${idTurno}/atendido`);
 
             const turnosActualizados = turnos.map(turno => {
-            if (turno.id === idTurno) {
-                return { ...turno, estado: "Atendido" };
-            }
+                if (turno.id === idTurno || turno._id === idTurno) {
+                    return { ...turno, estado: "atendido" }; // minúscula como el backend
+                }
                 return turno;
             });
-        setTurnos(turnosActualizados);
 
-        toast.success("Paciente llamado correctamente");
-
+            setTurnos(turnosActualizados);
+            toast.success("Paciente llamado correctamente");
         } catch (error) {
             console.error(error);
             toast.error("No se pudo actualizar el turno");
-        
         }
-    };
-
-    const obtenerIniciales = (nombre) => {
-        if (!nombre || nombre === "Paciente no disponible") return "?";
-        const partes = nombre.trim().split(" ");
-        const primera = partes[0]?.[0] || "";
-        const segunda = partes[1]?.[0] || "";
-        return (primera + segunda).toUpperCase();
     };
 
     return (
         <Container className="mt-4">
-            <h2 className="mb-4">Turnos del Día</h2>
+            <div className="d-flex justify-content-between align-items-center mb-4">
+                <h2>Turnos</h2>
+                <div>
+                    {["hoy", "proximos", "todos"].map((tipo) => (
+                        <Badge
+                            key={tipo}
+                            bg={filtroFecha === tipo ? "primary" : "secondary"}
+                            className="me-2 px-3 py-2"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => setFiltroFecha(tipo)}
+                        >
+                            {tipo === "hoy" ? "Hoy" : tipo === "proximos" ? "Próximos" : "Todos"}
+                        </Badge>
+                    ))}
+                </div>
+            </div>
 
             <BuscadorTurnos valor={busqueda} alCambiar={setBusqueda} />
 
             <Row>
                 {isLoading ? (
-                    [1, 2, 3, 4].map(item => <TurnoCardSkeleton key={item} />) 
-                ) : turnos.length === 0 ? (
-                    <p>No se encontraron turnos pendientes.</p>
-                ) : 
-                turnosFiltrados.map((turno) => (
-                    <TurnoCard
-                        key={turno.id}
-                        turno={turno}
-                        onAtender={marcarAtendido}
-                    />
-                ))}
+                    [1, 2, 3, 4].map(item => <TurnoCardSkeleton key={item} />)
+                ) : turnosFiltrados.length === 0 ? (
+                    <p className="text-muted text-center py-5">
+                        No se encontraron turnos {filtroFecha === "hoy" ? "para hoy" : ""}.
+                    </p>
+                ) : (
+                    turnosFiltrados.map((turno) => (
+                        <TurnoCard
+                            key={turno.id || turno._id}
+                            turno={turno}
+                            onAtender={marcarAtendido}
+                        />
+                    ))
+                )}
             </Row>
         </Container>
     );

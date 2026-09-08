@@ -1,6 +1,6 @@
 //Aca se escarga de traer los datos de la API y manejar el estado de carga. Se puede reutilizar en cualquier componente que necesite hacer fetch de datos.
 import { useState, useEffect } from 'react';
-import clientesAxios from '../config/axios';
+import clientesAxios from '../config/axios_config';
 import { toast } from 'sonner';
 
 export const useFetch = (endpoint) => {
@@ -16,7 +16,7 @@ export const useFetch = (endpoint) => {
                 setResponse(respuesta.data);
             } catch (error) {
                 toast.error("Error al cargar los datos");
-                console.log("ERROR: ${error.message}");
+                console.log(`ERROR: ${error.message}`);
             } finally {
                 setIsLoading(false);
             }
