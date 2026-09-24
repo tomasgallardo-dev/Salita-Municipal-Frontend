@@ -153,7 +153,7 @@ const ModalFormularioMedico = ({ show, onClose, medicoSeleccionado, especialidad
                     <Button variant="secondary" onClick={onClose} disabled={submitting}>
                         Cancelar
                     </Button>
-                    <Button variant="success" type="submit" disabled={submitting}>
+                    <Button variant="primary" type="submit" disabled={submitting}>
                         {submitting ? (
                             <>
                                 <Spinner as="span" animation="border" size="sm" className="me-2" />

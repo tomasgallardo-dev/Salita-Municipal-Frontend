@@ -84,8 +84,11 @@ const CrearTurno = () => {
 
         const turnoData = {
             paciente: form.paciente,
-            medico: form.medico,
-            especialidad: form.especialidad,
+            medico: form.medico || null,
+            especialidad: form.especialidad
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase(),
             fechaTurno: form.fechaTurno,
             observaciones: form.observaciones,
             urgente: form.urgente
@@ -96,8 +99,14 @@ const CrearTurno = () => {
             toast.success('¡Turno registrado exitosamente!');
             navigate('/dashboard');
         } catch (error: any) {
-            const mensaje = error.response?.data?.data || error.response?.data?.message || 'Error al crear el turno';
-            const errorFinal = Array.isArray(mensaje) ? mensaje.join(', ') : mensaje;
+            const detalle = error.response?.data?.data;
+            const mensaje = error.response?.data?.message || 'Error al crear el turno';
+            let errorFinal = mensaje;
+            if (Array.isArray(detalle)) {
+                errorFinal = detalle.map((d: any) => 
+                typeof d === 'string' ? d : `${d.campo}: ${d.mensaje}`)
+                .join('.')
+            }
             toast.error(errorFinal);
         } finally {
             setSubmitting(false);

@@ -9,8 +9,10 @@ interface TelefonoPacienteProps {
 
 const TelefonoPaciente = ({ paciente, handleChange }: TelefonoPacienteProps) => {
     return (
-        <fieldset className={styles.formGrid}>
+        <fieldset>
             <legend className={styles.subtitulo}>Teléfono</legend>
+
+            <div className={styles.formGrid}>
 
             <div className={styles.formGroup}>
                 <label>Cod.Area</label>
@@ -30,6 +32,7 @@ const TelefonoPaciente = ({ paciente, handleChange }: TelefonoPacienteProps) => 
                 value={paciente.telefono.numero}
                 onChange={handleChange}
                 />
+            </div>
             </div>
         </fieldset>
     );

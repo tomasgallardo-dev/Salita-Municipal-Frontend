@@ -84,7 +84,7 @@ const Especialidades = () => {
             <Stack direction="horizontal" className="justify-content-between align-items-center mb-4">
                 <h2>Gestión de Especialidades</h2>
                 <Button variant="primary" onClick={() => { limpiarFormulario(); setShowModal(true); }}>
-                    ➕ Nueva Especialidad
+                    Nueva Especialidad
                 </Button>
             </Stack>
 
@@ -110,9 +110,9 @@ const Especialidades = () => {
                                     <td className="fw-semibold">{esp.nombre}</td>
                                     <td>{esp.descripcion || 'Sin descripción'}</td>
                                     <td className="text-center">
-                                        <Button variant="info" size="sm" className="me-2 text-white" onClick={() => abrirModalDetalle(esp)}>Ver</Button>
-                                        <Button variant="warning" size="sm" className="me-2 text-white" onClick={() => abrirModalEditar(esp)}>Editar</Button>
-                                        <Button variant="danger" size="sm" onClick={() => handleEliminar(esp.id)}>Eliminar</Button>
+                                        <Button variant="outline-info" size="sm" className="me-2" onClick={() => abrirModalDetalle(esp)}>Ver</Button>
+                                        <Button variant="primary" size="sm" className="me-2" onClick={() => abrirModalEditar(esp)}>Editar</Button>
+                                        <Button variant="outline-danger" size="sm" onClick={() => handleEliminar(esp.id)}>Eliminar</Button>
                                     </td>
                                 </tr>
                             ))
@@ -138,7 +138,7 @@ const Especialidades = () => {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={() => setShowModal(false)}>Cancelar</Button>
-                        <Button variant="success" type="submit">{isEditing ? 'Guardar Cambios' : 'Crear'}</Button>
+                        <Button variant="primary" type="submit">{isEditing ? 'Guardar Cambios' : 'Crear'}</Button>
                     </Modal.Footer>
                 </Form>
             </Modal>

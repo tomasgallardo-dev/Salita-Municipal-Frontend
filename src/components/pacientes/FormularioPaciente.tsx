@@ -138,7 +138,17 @@ const FormularioPaciente = () => {
             }
             navigate("/dashboard/pacientes");
         } catch (error: any) {
-            toast.error(error.response?.data?.message || "No se pudo guardar el paciente");
+            const detalle = error.response?.data?.data;
+            let mensaje = error.response?.data?.message || "No se pudo guardar el paciente";
+
+            if (Array.isArray(detalle)) {
+                const textos = detalle.map((d: any) =>
+                    typeof d === "string" ? d : `${d.campo?.split(".").pop()}: ${d.mensaje}`
+                );
+                if (textos.length > 0) mensaje = mensaje + " · " + textos.join(" · ");
+            }
+
+            toast.error(mensaje);
         }
     };
 

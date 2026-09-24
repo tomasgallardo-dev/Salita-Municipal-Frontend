@@ -36,7 +36,7 @@ const TablaPacientes = ({ pacientes, onEditar, onEliminar }: TablaPacientesProps
                             <td className="align-middle">{paciente.edad}</td>
                             <td className="align-middle">
                                 <Button
-                                    variant="outline-primary"
+                                    variant="primary"
                                     size="sm"
                                     className="me-2"
                                     onClick={() => onEditar(paciente)}

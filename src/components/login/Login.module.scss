@@ -1,4 +1,4 @@
-$color-primario: #4361ee;
+$color-primario: #0d9488;
 $color-texto: #0f172a;
 $color-texto-suave: #475569;
 
@@ -10,7 +10,7 @@ $color-texto-suave: #475569;
     padding: 20px;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, #4361ee 0%, #0983b7 50%, #25f7e6 100%);
+    background: linear-gradient(135deg, #0f766e 0%, #14b8a6 50%, #5eead4 100%);
 
     // Blobs de color difuminados para dar profundidad al vidrio
     &::before,
@@ -25,7 +25,7 @@ $color-texto-suave: #475569;
     &::before {
         width: 380px;
         height: 380px;
-        background: #25f7e6;
+        background: #5eead4;
         top: -80px;
         left: -100px;
     }
@@ -33,7 +33,7 @@ $color-texto-suave: #475569;
     &::after {
         width: 420px;
         height: 420px;
-        background: #4cc9f0;
+        background: #99f6e4;
         bottom: -100px;
         right: -120px;
     }

@@ -53,11 +53,30 @@ const DashboardRecepcion = () => {
         }
     };
 
+        const limpiarAtendidos = async () => {
+        const confirmado = window.confirm("¿Eliminar todos los turnos atendidos? Esta acción no se deshace.");
+        if (!confirmado) return;
+
+        try {
+            const resp = await clientesAxios.delete('/turnos/atendidos');
+            // Quitamos del estado local los que quedaron "apagados"
+            setTurnos(turnos.filter(t => t.estado !== "atendido"));
+            const eliminados = resp.data?.data?.eliminados ?? 0;
+            toast.success(eliminados > 0 ? `Se eliminaron ${eliminados} turno(s) atendido(s)` : "No había turnos atendidos");
+        } catch (error) {
+            console.error(error);
+            toast.error("No se pudo limpiar los turnos atendidos");
+        }
+    };
+
     return (
         <Container className="mt-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <h2>Turnos</h2>
                 <div>
+                    <button className="btn btn-outline-danger btn-sm me-2" onClick={limpiarAtendidos}>
+                        Limpiar atendidos
+                    </button>
                     {["hoy", "proximos", "todos"].map((tipo) => (
                         <Badge
                             key={tipo}

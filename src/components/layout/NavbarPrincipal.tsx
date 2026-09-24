@@ -1,5 +1,5 @@
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const NavbarPrincipal = () => {
     const navigate = useNavigate();
@@ -10,19 +10,24 @@ const NavbarPrincipal = () => {
     };
 
     return (
-        <Navbar bg='dark' variant='dark' expand="lg" className='mb-4'>
+        <Navbar
+            variant='dark'
+            expand="lg"
+            className='mb-4'
+            style={{ background: "linear-gradient(135deg, #0f766e, #14b8a6)" }}
+        >
             <Container>
-                <Link to="/dashboard" className="navbar-brand">Salita Municipal</Link>
-                <Navbar.Toggle aria-controls='basic-navbar-nav'/>
+                <NavLink to="/dashboard" className="navbar-brand">Salita Municipal</NavLink>
+                <Navbar.Toggle aria-controls='basic-navbar-nav' />
                 <Navbar.Collapse id='basic-navbar-nav'>
                     <Nav className='me-auto'>
-                        <Link to="/dashboard" className="nav-link">Dashboard</Link>
-                        <Link to="/dashboard/pacientes" className="nav-link">Lista de Pacientes</Link>
-                        <Link to="/dashboard/nuevo-paciente" className="nav-link">Registrar Paciente</Link>
-                        <Link to="/dashboard/consultorios" className="nav-link">Consultorios</Link>
-                        <Link to="/dashboard/especialidades" className="nav-link">Especialidades</Link>
-                        <Link to="/dashboard/medicos" className="nav-link">Médicos</Link>
-                        <Link to="/dashboard/nuevo-turno" className="nav-link">Nuevo Turno</Link>
+                        <NavLink end to="/dashboard" className="nav-link">Dashboard</NavLink>
+                        <NavLink to="/dashboard/pacientes" className="nav-link">Lista de Pacientes</NavLink>
+                        <NavLink to="/dashboard/nuevo-paciente" className="nav-link">Registrar Paciente</NavLink>
+                        <NavLink to="/dashboard/consultorios" className="nav-link">Consultorios</NavLink>
+                        <NavLink to="/dashboard/especialidades" className="nav-link">Especialidades</NavLink>
+                        <NavLink to="/dashboard/medicos" className="nav-link">Médicos</NavLink>
+                        <NavLink to="/dashboard/nuevo-turno" className="nav-link">Nuevo Turno</NavLink>
                     </Nav>
                     <Button variant="outline-light" onClick={cerrarSesion}>
                         Cerrar sesión

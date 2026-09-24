@@ -154,7 +154,7 @@ const ModalFormularioConsultorio = ({ show, onClose, consultorioSeleccionado, me
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={onClose}>Cancelar</Button>
-                    <Button variant="success" type="submit">{isEditing ? 'Guardar Cambios' : 'Crear'}</Button>
+                    <Button variant="primary" type="submit">{isEditing ? 'Guardar Cambios' : 'Crear'}</Button>
                 </Modal.Footer>
             </Form>
         </Modal>

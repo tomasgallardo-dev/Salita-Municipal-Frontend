@@ -16,10 +16,13 @@ const DatosPersonales = ({ paciente, handleChange, errores, calcularEdad }: Dato
 
             <div className={styles.formGrid}>
                 <div className={styles.formGroup}>
-                    <label>Nombre Y Apellido *</label>
+                    <label>Nombre *</label>
                     <input type="text" className={styles.campoInput} name="nombre" value={paciente.nombre} onChange={handleChange} required placeholder="Nombre" />
                     {errores.nombre && <span className={styles.error}>{errores.nombre}</span>}
+                </div>
 
+                <div className={styles.formGroup}>
+                    <label>Apellido *</label>
                     <input type="text" className={styles.campoInput} name="apellido" value={paciente.apellido} onChange={handleChange} required placeholder="Apellido" />
                     {errores.apellido && <span className={styles.error}>{errores.apellido}</span>}
                 </div>
@@ -28,16 +31,6 @@ const DatosPersonales = ({ paciente, handleChange, errores, calcularEdad }: Dato
                     <label>DNI *</label>
                     <input type="text" className={styles.campoInput} name="dni" value={paciente.dni} onChange={handleChange} required />
                     {errores.dni && <span className={styles.error}>{errores.dni}</span>}
-                </div>
-
-                <div className={styles.formGroup}>
-                    <label>Fecha de Nacimiento *</label>
-                    <input type="date" className={styles.campoInput} name="fechaNacimiento" value={paciente.fechaNacimiento} onChange={handleChange} required />
-                </div>
-
-                <div className={styles.formGroup}>
-                    <label>Edad</label>
-                    <input type="text" className={styles.campoInput} value={calcularEdad(paciente.fechaNacimiento)} disabled />
                 </div>
 
                 <div className={styles.formGroup}>
@@ -55,6 +48,17 @@ const DatosPersonales = ({ paciente, handleChange, errores, calcularEdad }: Dato
                         <option value="Otro">Otro</option>
                     </select>
                 </div>
+                
+                <div className={styles.formGroup}>
+                    <label>Fecha de Nacimiento *</label>
+                    <input type="date" className={styles.campoInput} name="fechaNacimiento" value={paciente.fechaNacimiento} onChange={handleChange} required />
+                </div>
+
+                <div className={styles.formGroup}>
+                    <label>Edad</label>
+                    <input type="text" className={styles.campoInput} value={calcularEdad(paciente.fechaNacimiento)} disabled />
+                </div>
+
 
                 <div className={styles.formGroup}>
                     <label>Email*</label>

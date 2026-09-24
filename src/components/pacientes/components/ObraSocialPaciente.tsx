@@ -58,8 +58,10 @@ const ObraSocialPaciente = ({ paciente, handleChange }: ObraSocialPacienteProps)
     };
 
     return (
-        <fieldset className={styles.formGrid}>
+        <fieldset>
             <legend className={styles.subtitulo}>Obra Social</legend>
+
+            <div className={styles.formGrid}>
 
             <div className={styles.formGroup}>
                 <label>Obra Social</label>
@@ -68,6 +70,7 @@ const ObraSocialPaciente = ({ paciente, handleChange }: ObraSocialPacienteProps)
                     name="historialMedico.obraSocial"
                     value={valorSelect}
                     onChange={handleSelect}
+                    required
                 >
                     <option value="">Seleccione una opción</option>
                     {OBRAS_SOCIALES.map((obra) => (
@@ -91,15 +94,17 @@ const ObraSocialPaciente = ({ paciente, handleChange }: ObraSocialPacienteProps)
             )}
 
             <div className={styles.formGroup}>
-                <label>N° Afiliado</label>
+                <label>N° Afiliado{sinObraSocial ? "" : " *"}</label>
                 <input type="text"
                     className={styles.campoInput}
                     name="historialMedico.numAfiliado"
                     value={paciente.historialMedico.numAfiliado}
                     onChange={handleChange}
                     disabled={sinObraSocial}
-                    placeholder={sinObraSocial ? "Sin obra social" : ""}
+                    required={!sinObraSocial}
+                    placeholder={sinObraSocial ? "Sin obra social" : "Obligatorio si tiene obra social"}
                 />
+            </div>
             </div>
         </fieldset>
     );

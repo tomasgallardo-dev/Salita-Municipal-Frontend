@@ -69,7 +69,7 @@ const Consultorios = () => {
             <Stack direction="horizontal" className="justify-content-between align-items-center mb-4">
                 <h2>Gestión de Consultorios</h2>
                 <Button variant="primary" onClick={abrirModalNuevo}>
-                    ➕ Nuevo Consultorio
+                    Nuevo Consultorio
                 </Button>
             </Stack>
 
@@ -99,9 +99,9 @@ const Consultorios = () => {
                                     <td>{c.medico?.nombre || 'Sin asignar'}</td>
                                     <td>{c.email}</td>
                                     <td className="text-center">
-                                        <Button variant="info" size="sm" className="me-2 text-white" onClick={() => abrirModalDetalle(c)}>Ver</Button>
-                                        <Button variant="warning" size="sm" className="me-2 text-white" onClick={() => abrirModalEditar(c)}>Editar</Button>
-                                        <Button variant="danger" size="sm" onClick={() => handleEliminar(c.id)}>Eliminar</Button>
+                                        <Button variant="outline-info" size="sm" className="me-2" onClick={() => abrirModalDetalle(c)}>Ver</Button>
+                                        <Button variant="primary" size="sm" className="me-2" onClick={() => abrirModalEditar(c)}>Editar</Button>
+                                        <Button variant="outline-danger" size="sm" onClick={() => handleEliminar(c.id)}>Eliminar</Button>
                                     </td>
                                 </tr>
                             ))

@@ -15,6 +15,17 @@ const DireccionPaciente = ({ paciente, handleChange, sinNumero, handleCheckSinNu
             <legend className={styles.subtitulo}>Domicilio</legend>
 
             <div className={styles.formGroup}>
+                <label>Provincia</label>
+                <input type="text" className={styles.campoInput} name="direccion.provincia" value={paciente.direccion.provincia} onChange={handleChange} />
+            </div>
+            
+            <div className={styles.formGroup}>
+                <label>Ciudad</label>
+                <input type="text" className={styles.campoInput} name="direccion.ciudad" value={paciente.direccion.ciudad} onChange={handleChange} />
+            </div>
+
+
+            <div className={styles.formGroup}>
                 <label>Calle</label>
                 <input type="text" className={styles.campoInput} name="direccion.calle" value={paciente.direccion.calle} onChange={handleChange} />
             </div>
@@ -35,15 +46,6 @@ const DireccionPaciente = ({ paciente, handleChange, sinNumero, handleCheckSinNu
                 </label>
             </div>
 
-            <div className={styles.formGroup}>
-                <label>Ciudad</label>
-                <input type="text" className={styles.campoInput} name="direccion.ciudad" value={paciente.direccion.ciudad} onChange={handleChange} />
-            </div>
-
-            <div className={styles.formGroup}>
-                <label>Provincia</label>
-                <input type="text" className={styles.campoInput} name="direccion.provincia" value={paciente.direccion.provincia} onChange={handleChange} />
-            </div>
         </fieldset>
     );
 };
