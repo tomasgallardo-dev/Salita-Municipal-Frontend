@@ -11,9 +11,10 @@ interface DireccionPacienteProps {
 
 const DireccionPaciente = ({ paciente, handleChange, sinNumero, handleCheckSinNumero }: DireccionPacienteProps) => {
     return (
-        <fieldset className={styles.formGrid}>
+        <fieldset>
             <legend className={styles.subtitulo}>Domicilio</legend>
 
+            <div className={styles.formGrid}>
             <div className={styles.formGroup}>
                 <label>Provincia</label>
                 <input type="text" className={styles.campoInput} name="direccion.provincia" value={paciente.direccion.provincia} onChange={handleChange} />
@@ -45,7 +46,7 @@ const DireccionPaciente = ({ paciente, handleChange, sinNumero, handleCheckSinNu
                     {" "}Sin número (S/N)
                 </label>
             </div>
-
+            </div>
         </fieldset>
     );
 };

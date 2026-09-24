@@ -10,13 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.9.1",
     "axios": "^1.19.0",
     "bootstrap": "^5.3.8",
     "react": "^19.2.8",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.2.8",
+    "react-hook-form": "^7.88.0",
     "react-router-dom": "^7.18.2",
-    "sonner": "^2.0.8"
+    "sonner": "^2.0.8",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@babel/core": "^7.29.7",

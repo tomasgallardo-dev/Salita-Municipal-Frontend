@@ -48,7 +48,6 @@ const DatosPersonales = ({ paciente, handleChange, errores, calcularEdad }: Dato
                         <option value="Otro">Otro</option>
                     </select>
                 </div>
-                
                 <div className={styles.formGroup}>
                     <label>Fecha de Nacimiento *</label>
                     <input type="date" className={styles.campoInput} name="fechaNacimiento" value={paciente.fechaNacimiento} onChange={handleChange} required />
