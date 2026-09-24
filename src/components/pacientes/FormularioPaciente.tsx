@@ -1,26 +1,29 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type ChangeEvent, type FormEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 import styles from './FormularioPaciente.module.scss';
 import JsonDebugger from '../utils/JsonDebugger';
-import { validarDatos } from '../utils/validaciones';
+import { validarDatos, type ReglasValidacion } from '../utils/validaciones';
 import DatosPersonales from './components/DatosPersonales';
 import DireccionPaciente from './components/DireccionPaciente';
 import TelefonoPaciente from './components/TelefonoPaciente';
 import ObraSocialPaciente from './components/ObraSocialPaciente';
 import clientesAxios from '../../config/axios_config';
+import type { IPacienteForm, IEventoCampo } from '../../types/Paciente.types';
 
 // Reglas de validación por campo
-const reglasPaciente = {
-    nombre: (valor) => valor.trim() === "" ? "El nombre es obligatorio" : null,
-    dni: (valor) => valor.length < 8 ? "El DNI es obligatorio" : null,
+const reglasPaciente: ReglasValidacion = {
+    nombre: (valor: string) => valor.trim() === "" ? "El nombre es obligatorio" : null,
+    apellido: (valor: string) => valor.trim() === "" ? "El apellido es obligatorio" : null,
+    dni: (valor: string) => valor.length < 8 ? "El DNI es obligatorio" : null,
     // Cambiamos "email" por "correoelectronico"
     // Y validamos solo si el usuario escribió algo (valor !== "")
-    correoelectronico: (valor) => valor !== "" && !valor.includes("@") ? "El email debe contener @" : null,
+    correoelectronico: (valor: string) => valor !== "" && !valor.includes("@") ? "El email debe contener @" : null,
 };
 
-const estadoInicial = {
+const estadoInicial: IPacienteForm = {
     nombre: "",
+    apellido: "",
     dni: "",
     fechaNacimiento: "",
     sexo: "",
@@ -36,8 +39,8 @@ const FormularioPaciente = () => {
     const esEdicion = Boolean(id);
 
     // Estado con todos los datos del formulario
-    const [paciente, setPaciente] = useState(estadoInicial);
-    const [errores, setErrores] = useState({});
+    const [paciente, setPaciente] = useState<IPacienteForm>(estadoInicial);
+    const [errores, setErrores] = useState<Record<string, string>>({});
     const [sinNumero, setSinNumero] = useState(false);
     const [cargando, setCargando] = useState(esEdicion);
 
@@ -50,6 +53,7 @@ const FormularioPaciente = () => {
                 const datos = respuesta.data.data;
                 setPaciente({
                     nombre: datos.nombre || "",
+                    apellido: datos.apellido || "",
                     dni: datos.dni || "",
                     fechaNacimiento: datos.fechaNacimiento ? datos.fechaNacimiento.slice(0, 10) : "",
                     sexo: datos.sexo || "",
@@ -79,32 +83,34 @@ const FormularioPaciente = () => {
     }, [id, esEdicion, navigate]);
 
     // Actualiza cualquier campo, simple o anidado
-    const handleChange = (evento) => {
+    const handleChange = (evento: IEventoCampo) => {
         const { name, value } = evento.target;
 
-        if (name.includes(".")) {
-            const [grupo, campo] = name.split(".");
-            setPaciente({
-                ...paciente,
-                [grupo]: { ...paciente[grupo], [campo]: value },
-            });
-        } else {
-            setPaciente({ ...paciente, [name]: value });
-        }
-    };
+        setPaciente((prev) => {
+            if (!name.includes(".")) {
+                return { ...prev, [name]: value } as IPacienteForm;
+            }
 
-    // Checkbox "Sin número"
-    const handleCheckSinNumero = (evento) => {
-        const marcado = evento.target.checked;
-        setSinNumero(marcado);
-        setPaciente({
-            ...paciente,
-            direccion: { ...paciente.direccion, numero: marcado ? "S/N" : "" },
+            const [grupo, campo] = name.split(".");
+            return {
+                ...prev,
+                [grupo]: { ...(prev[grupo as keyof typeof prev] as unknown as Record<string, string>), [campo]: value },
+            } as IPacienteForm;
         });
     };
 
+    // Checkbox "Sin número"
+    const handleCheckSinNumero = (evento: ChangeEvent<HTMLInputElement>) => {
+        const marcado = evento.target.checked;
+        setSinNumero(marcado);
+        setPaciente((prev) => ({
+            ...prev,
+            direccion: { ...prev.direccion, numero: marcado ? "S/N" : "" },
+        }));
+    };
+
     // Calcula edad en vivo, sin guardarla
-    const calcularEdad = (fechaNacimiento) => {
+    const calcularEdad = (fechaNacimiento: string): number | string => {
         if (!fechaNacimiento) return "";
         const hoy = new Date();
         const nacimiento = new Date(fechaNacimiento);
@@ -114,7 +120,7 @@ const FormularioPaciente = () => {
         return edad;
     };
 
-    const handleSubmit = async (evento) => {
+    const handleSubmit = async (evento: FormEvent<HTMLFormElement>) => {
         evento.preventDefault();
 
         // Valida antes de enviar
@@ -131,7 +137,7 @@ const FormularioPaciente = () => {
                 toast.success("Paciente guardado con éxito");
             }
             navigate("/dashboard/pacientes");
-        } catch (error) {
+        } catch (error: any) {
             toast.error(error.response?.data?.message || "No se pudo guardar el paciente");
         }
     };

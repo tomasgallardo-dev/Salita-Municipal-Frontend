@@ -1,20 +1,21 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
+import type { ReactNode } from 'react';
 import { Toaster } from 'sonner';
 
-import Login from './components/login/Login';
-import LayoutPrincipal from './components/layout/LayoutPrincipal';
-import DashboardRecepcion from './pages/DashboardRecepcion';
-import FormularioPaciente from './components/pacientes/FormularioPaciente';
-import ListaPacientes from './components/pacientes/ListaPacientes';
+import Login from './components/login/Login.tsx';
+import LayoutPrincipal from './components/layout/LayoutPrincipal.tsx';
+import DashboardRecepcion from './pages/DashboardRecepcion.tsx';
+import FormularioPaciente from './components/pacientes/FormularioPaciente.tsx';
+import ListaPacientes from './components/pacientes/ListaPacientes.tsx';
 import DetalleTurno from './components/turnos/DetalleTurno';
-import Consultorio from './components/consultorio/Consultorio';
-import Especialidades from './components/especialidades/Especialidades';
-import GestionMedicos from './components/medicos/GestionMedico';
-import CrearTurno from './pages/CrearTurno';
-import NotFound from './components/utils/NotFound';
+import Consultorio from './components/consultorio/Consultorio.tsx';
+import Especialidades from './components/especialidades/Especialidades.tsx';
+import GestionMedicos from './components/medicos/GestionMedico.tsx';
+import CrearTurno from './pages/CrearTurno.tsx';
+import NotFound from './components/utils/NotFound.tsx';
 
 // Componente de protección de rutas
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ children }: { children: ReactNode }) => {
     const token = localStorage.getItem('token');
     return token ? children : <Navigate to="/login" replace />;
 };

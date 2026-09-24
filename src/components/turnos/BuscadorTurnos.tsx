@@ -1,6 +1,11 @@
 import { Row, Col, Form } from "react-bootstrap";
 
-const BuscadorTurnos = ({ valor, alCambiar }) => {
+interface BuscadorTurnosProps {
+    valor: string;
+    alCambiar: (valor: string) => void;
+}
+
+const BuscadorTurnos = ({ valor, alCambiar }: BuscadorTurnosProps) => {
     return (
         <Row className="mb-4">
             <Col md={6}>

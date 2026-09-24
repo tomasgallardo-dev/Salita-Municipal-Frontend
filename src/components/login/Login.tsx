@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, type ChangeEvent, type FormEvent }  from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
-import { Container, Card, Form, Button } from 'react-bootstrap';
-import clientesAxios from '../../config/axios_config.js'
+import { Form, Button } from 'react-bootstrap';
+import clientesAxios from '../../config/axios_config'
 import style from "./Login.module.scss";
 
 const Login = () => {
@@ -14,14 +14,15 @@ const Login = () => {
     const { email, password } = credenciales;
     const navigate = useNavigate();
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const name = e.target.name as keyof typeof credenciales;
         setCredenciales({
             ...credenciales,
-            [e.target.name]: e.target.value
+            [name]: e.target.value
         });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             const response = await clientesAxios.post('/auth/login', { email, password });
@@ -36,7 +37,7 @@ const Login = () => {
             toast.success('¡Bienvenido!');
             navigate('/dashboard');
 
-        } catch (error) {
+        } catch (error: any) {
             const mensaje = error.response?.data?.error
                 || error.response?.data?.message
                 || 'Credencial Incorrecta por favor introducir bien la credencial';
@@ -45,11 +46,14 @@ const Login = () => {
     };
 
     return (
-        <Container className="d-flex justify-content-center align-items-center" style={{minHeight: '80vh'}}>
-            <Card style={{ width: '420px' }} className="p-4 shadow">
-                <h2 className="text-center mb-4">Iniciar Sesión</h2>
+        <div className={style.fondoLogin}>
+            <div className={style.cardLogin}>
+                <div className={style.iconoLogin}>⚕</div>
+                <h2 className={style.tituloLogin}>Salita Municipal</h2>
+                <p className={style.subtituloLogin}>Ingresá a tu cuenta para acceder al sistema</p>
+
                 <Form onSubmit={handleSubmit}>
-                    <Form.Group className="mb-3">
+                    <Form.Group className={style.inputGroup}>
                         <Form.Label>Email</Form.Label>
                         <Form.Control
                             type="email"
@@ -60,7 +64,7 @@ const Login = () => {
                             required
                         />
                     </Form.Group>
-                    <Form.Group className="mb-3">
+                    <Form.Group className={style.inputGroup}>
                         <Form.Label>Contraseña</Form.Label>
                         <Form.Control
                             type="password"
@@ -72,12 +76,14 @@ const Login = () => {
                         />
                     </Form.Group>
 
-                    <Button variant="primary" type="submit" className="w-100 mt-2">
+                    <Button variant="primary" type="submit" className={style.btnLogin}>
                         Ingresar
                     </Button>
                 </Form>
-            </Card>
-        </Container>
+
+                <p className={style.pieLogin}>Sistema de gestión de un centro de salud municipal</p>
+            </div>
+        </div>
     );
 };
 

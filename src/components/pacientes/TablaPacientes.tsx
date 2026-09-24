@@ -1,6 +1,13 @@
 import { Table, Button } from 'react-bootstrap';
+import type { IPaciente } from '../../types/Paciente.types';
 
-const TablaPacientes = ({ pacientes, onEditar, onEliminar }) => {
+interface TablaPacientesProps {
+    pacientes: IPaciente[];
+    onEditar: (paciente: IPaciente) => void;
+    onEliminar: (paciente: IPaciente) => void;
+}
+
+const TablaPacientes = ({ pacientes, onEditar, onEliminar }: TablaPacientesProps) => {
     return (
         <Table striped bordered hover responsive>
             <thead>
@@ -13,16 +20,16 @@ const TablaPacientes = ({ pacientes, onEditar, onEliminar }) => {
                 </tr>
             </thead>
             <tbody>
-                {pacientes?.length === 0 ? (
+                {pacientes.length === 0 ? (
                     <tr>
-                        <td colSpan="5" className="text-center py-3">
+                        <td colSpan={5} className="text-center py-3">
                             No se encontraron pacientes.
                         </td>
                     </tr>
                 ) : (
-                    pacientes?.map((paciente) => (
-                        // Usamos _id porque en MongoDB suele venir así
-                        <tr key={paciente._id || paciente.id}>
+                    pacientes.map((paciente) => (
+                        // El backend manda `id` por el toJSON de Mongoose
+                        <tr key={paciente.id}>
                             <td className="align-middle">{paciente.nombre}</td>
                             <td className="align-middle">{paciente.apellido}</td>
                             <td className="align-middle">{paciente.dni}</td>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 
 const NotFound = () => {
     return (
@@ -17,9 +17,9 @@ const NotFound = () => {
                             <Card.Text className="text-body-secondary mb-4">
                                 La pagina que buscas no existe o ya no esta disponible.
                             </Card.Text>
-                            <Button as={Link} to="/" variant="primary">
+                            <Link to="/" className="btn btn-primary">
                                 Volver al inicio
-                            </Button>
+                            </Link>
                         </Card.Body>
                     </Card>
                 </Col>

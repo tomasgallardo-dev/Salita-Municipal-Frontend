@@ -1,6 +1,13 @@
+import type { ChangeEvent } from 'react';
 import styles from '../FormularioPaciente.module.scss';
+import type { IPacienteForm } from '../../../types/Paciente.types';
 
-const TelefonoPaciente = ({ paciente, handleChange }) => {
+interface TelefonoPacienteProps {
+    paciente: IPacienteForm;
+    handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+const TelefonoPaciente = ({ paciente, handleChange }: TelefonoPacienteProps) => {
     return (
         <fieldset className={styles.formGrid}>
             <legend className={styles.subtitulo}>Teléfono</legend>

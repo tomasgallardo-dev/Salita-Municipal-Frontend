@@ -1,6 +1,15 @@
+import type { ChangeEvent } from 'react';
 import styles from '../FormularioPaciente.module.scss';
+import type { IPacienteForm } from '../../../types/Paciente.types';
 
-const DireccionPaciente = ({ paciente, handleChange, sinNumero, handleCheckSinNumero }) => {
+interface DireccionPacienteProps {
+    paciente: IPacienteForm;
+    handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    sinNumero: boolean;
+    handleCheckSinNumero: (evento: ChangeEvent<HTMLInputElement>) => void;
+}
+
+const DireccionPaciente = ({ paciente, handleChange, sinNumero, handleCheckSinNumero }: DireccionPacienteProps) => {
     return (
         <fieldset className={styles.formGrid}>
             <legend className={styles.subtitulo}>Domicilio</legend>

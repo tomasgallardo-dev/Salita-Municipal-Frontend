@@ -6,37 +6,38 @@ import { useFetch } from '../../hooks/useFetch';
 import clientesAxios from '../../config/axios_config';
 
 import TablaPacientes from './TablaPacientes';
+import type { IPaciente } from '../../types/Paciente.types';
 
 const ListaPacientes = () => {
-    const { data: pacientes, setData, isLoading, error } = useFetch('/pacientes');
+    const { data: pacientes, setData, isLoading, error } = useFetch<IPaciente[]>('/pacientes');
     const [busqueda, setBusqueda] = useState("");
     const navigate = useNavigate();
 
-    const manejarEditar = (paciente) => {
-        const id = paciente.id || paciente._id;
-        navigate(`/dashboard/editar-paciente/${id}`);
+    const manejarEditar = (paciente: IPaciente) => {
+        navigate(`/dashboard/editar-paciente/${paciente.id}`);
     };
 
-    const manejarEliminar = async (paciente) => {
-        const id = paciente.id || paciente._id;
+    const manejarEliminar = async (paciente: IPaciente) => {
+        const id = paciente.id;
         const confirmado = window.confirm(`¿Seguro que querés eliminar a ${paciente.nombre} ${paciente.apellido}?`);
         if (!confirmado) return;
 
         try {
             await clientesAxios.delete(`/pacientes/${id}`);
-            setData((prev) => prev.filter((p) => (p.id || p._id) !== id));
+            setData((prev) => prev.filter((p) => p.id !== id));
             toast.success("Paciente eliminado correctamente");
         } catch (error) {
             toast.error("No se pudo eliminar el paciente");
         }
     };
 
-    const pacientesFiltrados = pacientes?.filter(paciente => {
+    const pacientesFiltrados = pacientes.filter(paciente => {
         const termino = busqueda.toLowerCase();
-        const coincideNombre = paciente.nombre?.toLowerCase().includes(termino);
-        const coincideDni = paciente.dni?.includes(termino);
-        return coincideNombre || coincideDni;
-    }) || [];
+        const coincideNombre = paciente.nombre.toLowerCase().includes(termino);
+        const coincideApellido = paciente.apellido.toLowerCase().includes(termino);
+        const coincideDni = paciente.dni.includes(termino);
+        return coincideNombre || coincideApellido || coincideDni;
+    });
 
     return (
         <Container className="mt-4">

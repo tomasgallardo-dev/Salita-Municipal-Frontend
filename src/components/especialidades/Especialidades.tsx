@@ -1,15 +1,15 @@
-// src/components/especialidades/Especialidades.jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type FormEvent } from 'react';
 import { Container, Table, Button, Modal, Form, Card, Stack } from 'react-bootstrap';
 import { toast } from 'sonner';
 import clientesAxios from '../../config/axios_config';
+import type { IEspecialidad } from '../../types/Especialidad.types';
 
 const Especialidades = () => {
-    const [especialidades, setEspecialidades] = useState([]);
+    const [especialidades, setEspecialidades] = useState<IEspecialidad[]>([]);
     const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
     const [showDetalle, setShowDetalle] = useState(false);
-    const [especialidadSeleccionada, setEspecialidadSeleccionada] = useState(null);
+    const [especialidadSeleccionada, setEspecialidadSeleccionada] = useState<IEspecialidad | null>(null);
     const [isEditing, setIsEditing] = useState(false);
 
     const [nombre, setNombre] = useState('');
@@ -30,11 +30,11 @@ const Especialidades = () => {
         cargarEspecialidades();
     }, []);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            if (isEditing) {
-                await clientesAxios.put(`/especialidades/${especialidadSeleccionada.id || especialidadSeleccionada._id}`, { nombre, descripcion });
+            if (isEditing && especialidadSeleccionada) {
+                await clientesAxios.put(`/especialidades/${especialidadSeleccionada.id}`, { nombre, descripcion });
                 toast.success('¡Especialidad actualizada!');
             } else {
                 await clientesAxios.post('/especialidades', { nombre, descripcion });
@@ -43,12 +43,12 @@ const Especialidades = () => {
             setShowModal(false);
             limpiarFormulario();
             cargarEspecialidades();
-        } catch (error) {
+        } catch (error: any) {
             toast.error(error.response?.data?.message || 'Error en la operación');
         }
     };
 
-    const handleEliminar = async (id) => {
+    const handleEliminar = async (id: string) => {
         if (!window.confirm('¿Estás seguro de eliminar esta especialidad?')) return;
         try {
             await clientesAxios.delete(`/especialidades/${id}`);
@@ -59,7 +59,7 @@ const Especialidades = () => {
         }
     };
 
-    const abrirModalEditar = (esp) => {
+    const abrirModalEditar = (esp: IEspecialidad) => {
         setIsEditing(true);
         setEspecialidadSeleccionada(esp);
         setNombre(esp.nombre || '');
@@ -67,7 +67,7 @@ const Especialidades = () => {
         setShowModal(true);
     };
 
-    const abrirModalDetalle = (esp) => {
+    const abrirModalDetalle = (esp: IEspecialidad) => {
         setEspecialidadSeleccionada(esp);
         setShowDetalle(true);
     };
@@ -102,17 +102,17 @@ const Especialidades = () => {
                     <tbody>
                         {especialidades.length === 0 ? (
                             <tr>
-                                <td colSpan="3" className="text-center text-muted">No hay especialidades registradas.</td>
+                                <td colSpan={3} className="text-center text-muted">No hay especialidades registradas.</td>
                             </tr>
                         ) : (
                             especialidades.map((esp) => (
-                                <tr key={esp.id || esp._id}>
+                                <tr key={esp.id}>
                                     <td className="fw-semibold">{esp.nombre}</td>
                                     <td>{esp.descripcion || 'Sin descripción'}</td>
                                     <td className="text-center">
                                         <Button variant="info" size="sm" className="me-2 text-white" onClick={() => abrirModalDetalle(esp)}>Ver</Button>
                                         <Button variant="warning" size="sm" className="me-2 text-white" onClick={() => abrirModalEditar(esp)}>Editar</Button>
-                                        <Button variant="danger" size="sm" onClick={() => handleEliminar(esp.id || esp._id)}>Eliminar</Button>
+                                        <Button variant="danger" size="sm" onClick={() => handleEliminar(esp.id)}>Eliminar</Button>
                                     </td>
                                 </tr>
                             ))
@@ -151,7 +151,7 @@ const Especialidades = () => {
                     {especialidadSeleccionada && (
                         <Card className="border-0">
                             <Card.Body>
-                                <p><strong>ID:</strong> {especialidadSeleccionada.id || especialidadSeleccionada._id}</p>
+                                <p><strong>ID:</strong> {especialidadSeleccionada.id}</p>
                                 <p><strong>Nombre:</strong> {especialidadSeleccionada.nombre}</p>
                                 <p><strong>Descripción:</strong> {especialidadSeleccionada.descripcion || 'Sin descripción'}</p>
                             </Card.Body>

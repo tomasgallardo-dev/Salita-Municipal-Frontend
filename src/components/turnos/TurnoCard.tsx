@@ -1,6 +1,7 @@
 import { Col, Card, Badge, Button } from "react-bootstrap";
+import type { TurnoCardProps } from "../../types/Turno.types";
 
-const TurnoCard = ({ turno, onAtender }) => {
+const TurnoCard = ({ turno, onAtender }: TurnoCardProps) => {
     return (
         <Col md={4} className="mb-3">
             <Card>

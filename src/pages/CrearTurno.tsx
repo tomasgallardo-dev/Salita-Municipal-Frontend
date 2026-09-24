@@ -1,15 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type ChangeEvent, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Card, Row, Col, Spinner } from 'react-bootstrap';
 import { toast } from 'sonner';
 import clientesAxios from '../config/axios_config';
+import type { IPaciente } from '../types/Paciente.types';
+import type { IMedico } from '../types/Medico.types';
+import type { IEspecialidad } from '../types/Especialidad.types';
 
 const CrearTurno = () => {
     const navigate = useNavigate();
 
-    const [pacientes, setPacientes] = useState([]);
-    const [medicos, setMedicos] = useState([]);
-    const [especialidades, setEspecialidades] = useState([]);
+    const [pacientes, setPacientes] = useState<IPaciente[]>([]);
+    const [medicos, setMedicos] = useState<IMedico[]>([]);
+    const [especialidades, setEspecialidades] = useState<IEspecialidad[]>([]);
     const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
 
@@ -53,23 +56,21 @@ const CrearTurno = () => {
         return espMedico === form.especialidad.toLowerCase();
     });
 
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        const name = e.target.name as keyof typeof form;
+        const nuevoValor = e.target.type === 'checkbox'
+            ? (e.target as HTMLInputElement).checked
+            : e.target.value;
 
         setForm(prev => {
-            const nuevo = {
-                ...prev,
-                [name]: type === 'checkbox' ? checked : value
-            };
+            const next = { ...prev, [name]: nuevoValor } as typeof prev;
             // Si cambia especialidad, resetear médico
-            if (name === 'especialidad') {
-                nuevo.medico = '';
-            }
-            return nuevo;
+            if (name === 'especialidad') next.medico = '';
+            return next;
         });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         // Validar fecha futura
@@ -94,7 +95,7 @@ const CrearTurno = () => {
             await clientesAxios.post('/turnos', turnoData);
             toast.success('¡Turno registrado exitosamente!');
             navigate('/dashboard');
-        } catch (error) {
+        } catch (error: any) {
             const mensaje = error.response?.data?.data || error.response?.data?.message || 'Error al crear el turno';
             const errorFinal = Array.isArray(mensaje) ? mensaje.join(', ') : mensaje;
             toast.error(errorFinal);
@@ -123,7 +124,7 @@ const CrearTurno = () => {
                         <Form.Select name="paciente" value={form.paciente} onChange={handleChange} required>
                             <option value="">Seleccione un paciente...</option>
                             {pacientes.map((p) => (
-                                <option key={p.id || p._id} value={p.id || p._id}>
+                                <option key={p.id} value={p.id}>
                                     {p.nombre} - DNI: {p.dni}
                                 </option>
                             ))}
@@ -137,7 +138,7 @@ const CrearTurno = () => {
                                 <Form.Select name="especialidad" value={form.especialidad} onChange={handleChange} required>
                                     <option value="">Seleccione...</option>
                                     {especialidades.map((esp) => (
-                                        <option key={esp.id || esp._id} value={esp.nombre}>
+                                        <option key={esp.id} value={esp.nombre}>
                                             {esp.nombre}
                                         </option>
                                     ))}
@@ -163,7 +164,7 @@ const CrearTurno = () => {
                                         }
                                     </option>
                                     {medicosFiltrados.map((m) => (
-                                        <option key={m.id || m._id} value={m.id || m._id}>
+                                        <option key={m.id} value={m.id}>
                                             {m.nombre}
                                         </option>
                                     ))}

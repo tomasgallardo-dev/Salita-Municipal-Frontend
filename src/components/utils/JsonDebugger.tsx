@@ -1,10 +1,15 @@
-const JsonDebugger = ({ data, titulo = "Estado actual del JSON" }) => {
+interface JsonDebuggerProps {
+    data: unknown;
+    titulo?: string;
+}
+
+const JsonDebugger = ({ data, titulo = "Estado actual del JSON" }: JsonDebuggerProps) => {
     if (!data) {
         return null;
     }
 
     return (
-        <div style={{ 
+        <div style={{
             backgroundColor: "#66a3ea",
             padding: "10px",
             borderRadius: "5px",
@@ -15,7 +20,6 @@ const JsonDebugger = ({ data, titulo = "Estado actual del JSON" }) => {
             color: "#333",
             fontSize: "14px",
             fontWeight: "normal",
-            fontFamily: "Courier New, monospace",
             overflowX: "auto"
         }}>
             <p style={{

@@ -1,6 +1,15 @@
+import type { ChangeEvent } from 'react';
 import styles from '../FormularioPaciente.module.scss';
+import type { IPacienteForm } from '../../../types/Paciente.types';
 
-const DatosPersonales = ({ paciente, handleChange, errores, calcularEdad }) => {
+interface DatosPersonalesProps {
+    paciente: IPacienteForm;
+    handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+    errores: Record<string, string>;
+    calcularEdad: (fechaNacimiento: string) => number | string;
+}
+
+const DatosPersonales = ({ paciente, handleChange, errores, calcularEdad }: DatosPersonalesProps) => {
     return (
         <fieldset>
             <legend className={styles.subtitulo}>Datos Personales</legend>
@@ -8,8 +17,11 @@ const DatosPersonales = ({ paciente, handleChange, errores, calcularEdad }) => {
             <div className={styles.formGrid}>
                 <div className={styles.formGroup}>
                     <label>Nombre Y Apellido *</label>
-                    <input type="text" className={styles.campoInput} name="nombre" value={paciente.nombre} onChange={handleChange} required />
+                    <input type="text" className={styles.campoInput} name="nombre" value={paciente.nombre} onChange={handleChange} required placeholder="Nombre" />
                     {errores.nombre && <span className={styles.error}>{errores.nombre}</span>}
+
+                    <input type="text" className={styles.campoInput} name="apellido" value={paciente.apellido} onChange={handleChange} required placeholder="Apellido" />
+                    {errores.apellido && <span className={styles.error}>{errores.apellido}</span>}
                 </div>
 
                 <div className={styles.formGroup}>
@@ -46,7 +58,7 @@ const DatosPersonales = ({ paciente, handleChange, errores, calcularEdad }) => {
 
                 <div className={styles.formGroup}>
                     <label>Email*</label>
-                    <input type="email" className={styles.campoInput} name="correoelectronico" value={paciente.correoelectronico} onChange={handleChange} />
+                    <input type="email" className={styles.campoInput} name="correoelectronico" value={paciente.correoelectronico} onChange={handleChange} required />
                     {errores.correoelectronico && <span className={styles.error}>{errores.correoelectronico}</span>}
                 </div>
             </div>

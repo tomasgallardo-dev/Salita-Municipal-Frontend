@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useFetch } from "../hooks/useFetch";
-import { Container, Row, Spinner, Badge } from "react-bootstrap";
+import { Container, Row, Badge } from "react-bootstrap";
 import { toast } from 'sonner';
 import clientesAxios from "../config/axios_config";
 
@@ -8,11 +8,13 @@ import BuscadorTurnos from "../components/turnos/BuscadorTurnos";
 import TurnoCard from "../components/turnos/TurnoCard";
 import TurnoCardSkeleton from "../components/turnos/TurnoCardSkeleton";
 
+import type { ITurno } from "../types/Turno.types";
+
 const DashboardRecepcion = () => {
     const [busqueda, setBusqueda] = useState("");
     const [filtroFecha, setFiltroFecha] = useState("hoy"); // "hoy" | "proximos" | "todos"
 
-    const { data: turnos, setData: setTurnos, isLoading } = useFetch('/turnos');
+    const { data: turnos, setData: setTurnos, isLoading } = useFetch<ITurno[]>('/turnos');
 
     const hoyString = new Date().toISOString().split('T')[0];
 
@@ -32,12 +34,12 @@ const DashboardRecepcion = () => {
         return true; // "todos"
     });
 
-    const marcarAtendido = async (idTurno) => {
+    const marcarAtendido = async (idTurno: string) => {
         try {
             await clientesAxios.patch(`/turnos/${idTurno}/atendido`);
 
-            const turnosActualizados = turnos.map(turno => {
-                if (turno.id === idTurno || turno._id === idTurno) {
+            const turnosActualizados = turnos.map((turno): ITurno => {
+                if (turno.id === idTurno) {
                     return { ...turno, estado: "atendido" }; // minúscula como el backend
                 }
                 return turno;
@@ -82,7 +84,7 @@ const DashboardRecepcion = () => {
                 ) : (
                     turnosFiltrados.map((turno) => (
                         <TurnoCard
-                            key={turno.id || turno._id}
+                            key={turno.id}
                             turno={turno}
                             onAtender={marcarAtendido}
                         />

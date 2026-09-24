@@ -1,0 +1,142 @@
+$color-primario: #4361ee;
+$color-texto: #0f172a;
+$color-texto-suave: #475569;
+
+.fondoLogin {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #4361ee 0%, #0983b7 50%, #25f7e6 100%);
+
+    // Blobs de color difuminados para dar profundidad al vidrio
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.6;
+    }
+
+    &::before {
+        width: 380px;
+        height: 380px;
+        background: #25f7e6;
+        top: -80px;
+        left: -100px;
+    }
+
+    &::after {
+        width: 420px;
+        height: 420px;
+        background: #4cc9f0;
+        bottom: -100px;
+        right: -120px;
+    }
+}
+
+.cardLogin {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 20px;
+    padding: 40px 36px 28px;
+
+    // Vidrio esmerilado
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+}
+
+.iconoLogin {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 14px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.tituloLogin {
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 4px !important;
+    text-align: center;
+}
+
+.subtituloLogin {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 26px;
+}
+
+.inputGroup {
+    margin-bottom: 18px;
+
+    label {
+        font-size: 13px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.95);
+    }
+
+    input {
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        border-radius: 10px;
+        padding: 10px 14px;
+        color: #ffffff;
+        transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
+
+        &::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        &:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.22);
+            color: #ffffff;
+        }
+    }
+}
+
+.btnLogin {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 11px;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.95);
+    color: $color-primario;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+
+    &:hover {
+        transform: translateY(-1px);
+        background: #ffffff;
+        color: $color-primario;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.pieLogin {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.75);
+}
