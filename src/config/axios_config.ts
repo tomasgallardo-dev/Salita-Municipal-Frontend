@@ -1,3 +1,6 @@
+// axios_config - Cliente axios con baseURL desde env, inyecta el token en Authorization (sin 'Bearer') y redirige a /login en 401.
+// Se conecta con: todas las llamadas HTTP del frontend.
+
 import axios from 'axios';
 import type { AxiosError } from 'axios';
 

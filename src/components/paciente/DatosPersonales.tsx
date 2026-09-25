@@ -1,6 +1,9 @@
+// DatosPersonales - Bloque de datos personales (nombre, apellido, DNI, sexo, fecha, edad, email).
+// Se conecta con: FormularioPaciente (padre) y FormularioPaciente.module.scss.
+
 import type { ChangeEvent } from 'react';
-import styles from '../FormularioPaciente.module.scss';
-import type { IPacienteForm } from '../../../types/Paciente.types';
+import styles from './FormularioPaciente.module.scss';
+import type { IPacienteForm } from '../../types/Paciente.types';
 
 interface DatosPersonalesProps {
     paciente: IPacienteForm;

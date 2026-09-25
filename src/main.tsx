@@ -1,3 +1,6 @@
+// main.tsx - Punto de entrada: monta React (StrictMode) con Bootstrap + BrowserRouter.
+// Se conecta con: App y styles/tema.scss.
+
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App'

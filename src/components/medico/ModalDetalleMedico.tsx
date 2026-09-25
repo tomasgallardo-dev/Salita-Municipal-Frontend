@@ -1,3 +1,6 @@
+// ModalDetalleMedico - Muestra los datos de un medico (especialidad poblada).
+// Se conecta con: GestionMedico (padre).
+
 import { Modal, Card, Button } from 'react-bootstrap';
 import type { IMedico } from '../../types/Medico.types';
 import { getNombreEspecialidad } from './medicoUtils';

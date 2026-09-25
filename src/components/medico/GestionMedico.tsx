@@ -1,3 +1,6 @@
+// GestionMedico - CRUD de medicos: lista con modales de detalle, alta/edicion y borrado.
+// Se conecta con: ModalDetalleMedico, ModalFormularioMedico, medicoUtils y API /medicos.
+
 import { useState, useEffect } from 'react';
 import { Container, Table, Button, Stack, Spinner } from 'react-bootstrap';
 import { toast } from 'sonner';

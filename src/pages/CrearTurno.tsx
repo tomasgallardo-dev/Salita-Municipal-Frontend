@@ -1,3 +1,6 @@
+// CrearTurno - Alta de turno: filtra medicos por especialidad, valida fecha futura y envia urgente.
+// Se conecta con: API /turnos, /pacientes, /medicos y /especialidades.
+
 import { useState, useEffect, type ChangeEvent, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Card, Row, Col, Spinner } from 'react-bootstrap';

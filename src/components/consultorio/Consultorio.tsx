@@ -1,3 +1,6 @@
+// Consultorio - CRUD de consultorios: lista con modales de detalle y alta/edicion.
+// Se conecta con: ModalDetalleConsultorio, ModalFormularioConsultorio y API /consultorios.
+
 import { useState, useEffect } from 'react';
 import { Container, Table, Button, Stack } from 'react-bootstrap';
 import { toast } from 'sonner';

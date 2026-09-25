@@ -1,3 +1,6 @@
+// Paciente.types - IPaciente (respuesta del backend), IPacienteForm e IEventoCampo (formulario).
+// Se conecta con: paciente/* y backend.
+
 export type SexoPaciente = 'Masculino' | 'Femenino' | 'Otro';
 
 export interface IDireccion {

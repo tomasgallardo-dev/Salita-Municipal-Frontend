@@ -1,3 +1,6 @@
+// ListaPacientes - Lista de pacientes con busqueda; gestiona borrado y la edicion navega al formulario.
+// Se conecta con: TablaPacientes, useFetch y API /pacientes.
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Spinner } from 'react-bootstrap';

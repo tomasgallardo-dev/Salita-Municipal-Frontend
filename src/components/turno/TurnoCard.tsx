@@ -1,6 +1,9 @@
+// TurnoCard - Card de turno: estado, guardia, boton 'Llamar' (atendido) y acceso al detalle del paciente.
+// Se conecta con: ModalDetallePaciente, DashboardRecepcion (padre) y types/Turno.types.
+
 import { useState } from "react";
 import { Col, Card, Badge, Button } from "react-bootstrap";
-import ModalDetallePaciente from "../pacientes/ModalDetallePaciente";
+import ModalDetallePaciente from "../paciente/ModalDetallePaciente";
 import type { TurnoCardProps, EstadoTurno } from "../../types/Turno.types";
 
 interface EstiloEstado {

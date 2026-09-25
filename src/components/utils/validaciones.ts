@@ -1,3 +1,6 @@
+// validaciones - Utilidad validarDatos: corre reglas por campo y devuelve { campo: mensaje }.
+// Se conecta con: FormularioPaciente.
+
 export type ReglaValidacion = (valor: any) => string | null;
 
 export interface ReglasValidacion {

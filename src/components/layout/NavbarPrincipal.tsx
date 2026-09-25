@@ -1,3 +1,6 @@
+// NavbarPrincipal - Barra de navegacion con links a cada modulo y boton de cerrar sesion.
+// Se conecta con: react-router (NavLink) y localStorage (token).
+
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
 

@@ -1,3 +1,6 @@
+// App.tsx - Rutas de la SPA: login publico y modulo /dashboard protegido con token (localStorage).
+// Se conecta con: Login, LayoutPrincipal, todas las paginas/componentes y Toaster (sonner).
+
 import { Routes, Route, Navigate } from 'react-router-dom';
 import type { ReactNode } from 'react';
 import { Toaster } from 'sonner';
@@ -5,12 +8,12 @@ import { Toaster } from 'sonner';
 import Login from './components/login/Login.tsx';
 import LayoutPrincipal from './components/layout/LayoutPrincipal.tsx';
 import DashboardRecepcion from './pages/DashboardRecepcion.tsx';
-import FormularioPaciente from './components/pacientes/FormularioPaciente.tsx';
-import ListaPacientes from './components/pacientes/ListaPacientes.tsx';
-import DetalleTurno from './components/turnos/DetalleTurno';
+import FormularioPaciente from './components/paciente/FormularioPaciente.tsx';
+import ListaPacientes from './components/paciente/ListaPacientes.tsx';
+import DetalleTurno from './components/turno/DetalleTurno';
 import Consultorio from './components/consultorio/Consultorio.tsx';
-import Especialidades from './components/especialidades/Especialidades.tsx';
-import GestionMedicos from './components/medicos/GestionMedico.tsx';
+import Especialidades from './components/especialidad/Especialidad.tsx';
+import GestionMedicos from './components/medico/GestionMedico.tsx';
 import CrearTurno from './pages/CrearTurno.tsx';
 import NotFound from './components/utils/NotFound.tsx';
 

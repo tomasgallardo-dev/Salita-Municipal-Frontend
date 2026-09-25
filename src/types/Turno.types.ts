@@ -1,3 +1,6 @@
+// Turno.types - ITurno, EstadoTurno y TurnoCardProps.
+// Se conecta con: turno/*, DashboardRecepcion y backend.
+
 import type { IPaciente } from './Paciente.types';
 
 export type EstadoTurno = 'pendiente' | 'atendido' | 'cancelado';

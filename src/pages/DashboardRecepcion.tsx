@@ -1,12 +1,15 @@
+// DashboardRecepcion - Lista/filtra los turnos (busqueda por nombre + filtro hoy/proximos/todos), marca 'atendido' y limpia atendidos.
+// Se conecta con: useFetch, BuscadorTurnos, TurnoCard, TurnoCardSkeleton y API /turnos.
+
 import { useState } from "react";
 import { useFetch } from "../hooks/useFetch";
 import { Container, Row, Badge } from "react-bootstrap";
 import { toast } from 'sonner';
 import clientesAxios from "../config/axios_config";
 
-import BuscadorTurnos from "../components/turnos/BuscadorTurnos";
-import TurnoCard from "../components/turnos/TurnoCard";
-import TurnoCardSkeleton from "../components/turnos/TurnoCardSkeleton";
+import BuscadorTurnos from "../components/turno/BuscadorTurnos";
+import TurnoCard from "../components/turno/TurnoCard";
+import TurnoCardSkeleton from "../components/turno/TurnoCardSkeleton";
 
 import type { ITurno } from "../types/Turno.types";
 

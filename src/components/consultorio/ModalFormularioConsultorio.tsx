@@ -1,3 +1,6 @@
+// ModalFormularioConsultorio - Formulario de alta/edicion de consultorio.
+// Se conecta con: Consultorio (padre) y API /consultorios (POST/PUT).
+
 import { useState, useEffect, type ChangeEvent, type FormEvent } from 'react';
 import { Modal, Form, Button, Row, Col } from 'react-bootstrap';
 import { toast } from 'sonner';

@@ -1,3 +1,6 @@
+// Especialidad - CRUD de especialidades (nombre + descripcion).
+// Se conecta con: API /especialidades (GET/POST/PUT/DELETE).
+
 import { useState, useEffect, type FormEvent } from 'react';
 import { Container, Table, Button, Modal, Form, Card, Stack } from 'react-bootstrap';
 import { toast } from 'sonner';

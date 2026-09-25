@@ -1,3 +1,6 @@
+// Login - Pantalla de ingreso (email+password) que guarda el token en localStorage y navega al dashboard.
+// Se conecta con: API /auth/login y Login.module.scss.
+
 import { useState, type ChangeEvent, type FormEvent }  from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';

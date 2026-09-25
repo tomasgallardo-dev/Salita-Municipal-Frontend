@@ -1,3 +1,6 @@
+// NotFound - Pagina 404 para rutas inexistentes.
+// Se conecta con: App (ruta catch-all).
+
 import { Link } from "react-router-dom";
 import { Card, Col, Container, Row } from "react-bootstrap";
 

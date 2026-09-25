@@ -1,3 +1,6 @@
+// TurnoCardSkeleton - Placeholder de carga que se muestra mientras llegan los turnos.
+// Se conecta con: DashboardRecepcion (padre).
+
 import { Col, Card, Placeholder } from 'react-bootstrap';
 
 const TurnoCardSkeleton = () => {

@@ -1,3 +1,6 @@
+// BuscadorTurnos - Input de busqueda reutilizable (filtro por nombre de paciente).
+// Se conecta con: DashboardRecepcion (padre).
+
 import { Row, Col, Form } from "react-bootstrap";
 
 interface BuscadorTurnosProps {

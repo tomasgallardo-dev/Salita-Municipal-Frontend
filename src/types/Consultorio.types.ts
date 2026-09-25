@@ -1,3 +1,6 @@
+// Consultorio.types - IFrontInterface del consultorio (id, medico/especialidad como ref, numero, piso, telefono).
+// Se conecta con: consultorio/* y backend.
+
 import type { IMedico } from './Medico.types';
 import type { IEspecialidad } from './Especialidad.types';
 

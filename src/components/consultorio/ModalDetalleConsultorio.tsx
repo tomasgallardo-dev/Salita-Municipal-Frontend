@@ -1,3 +1,6 @@
+// ModalDetalleConsultorio - Muestra los datos de un consultorio (medico y especialidad poblados).
+// Se conecta con: Consultorio (padre).
+
 import { Modal, Card, Button } from 'react-bootstrap';
 import type { IConsultorio } from '../../types/Consultorio.types';
 

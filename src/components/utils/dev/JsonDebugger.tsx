@@ -1,3 +1,6 @@
+// JsonDebugger - Utilidad de desarrollo: imprime un JSON en pantalla (NO usar en produccion).
+// Se conecta con: FormularioPaciente.
+
 interface JsonDebuggerProps {
     data: unknown;
     titulo?: string;

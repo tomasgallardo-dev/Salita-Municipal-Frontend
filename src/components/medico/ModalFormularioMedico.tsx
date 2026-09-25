@@ -1,3 +1,6 @@
+// ModalFormularioMedico - Formulario de alta/edicion de medico (exige especialidad).
+// Se conecta con: GestionMedico (padre) y API /medicos (POST/PUT).
+
 import { useState, useEffect, type ChangeEvent, type FormEvent } from 'react';
 import { Modal, Form, Button, Row, Col, Spinner } from 'react-bootstrap';
 import { toast } from 'sonner';

@@ -1,3 +1,6 @@
+// ModalDetallePaciente - Modal con el detalle completo de un paciente.
+// Se conecta con: TurnoCard y ListaPacientes.
+
 import { Modal, Card, Button } from 'react-bootstrap';
 import type { IPaciente } from '../../types/Paciente.types';
 

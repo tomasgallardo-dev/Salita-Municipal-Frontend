@@ -1,6 +1,9 @@
+// DireccionPaciente - Bloque de domicilio (provincia, ciudad, calle, numero con opcion 'Sin numero').
+// Se conecta con: FormularioPaciente (padre) y FormularioPaciente.module.scss.
+
 import type { ChangeEvent } from 'react';
-import styles from '../FormularioPaciente.module.scss';
-import type { IPacienteForm } from '../../../types/Paciente.types';
+import styles from './FormularioPaciente.module.scss';
+import type { IPacienteForm } from '../../types/Paciente.types';
 
 interface DireccionPacienteProps {
     paciente: IPacienteForm;

@@ -1,6 +1,9 @@
+// ObraSocialPaciente - Bloque de obra social (desplegable + numero de afiliado obligatorio si aplica).
+// Se conecta con: FormularioPaciente (padre) y FormularioPaciente.module.scss.
+
 import { useState, type ChangeEvent } from 'react';
-import styles from '../FormularioPaciente.module.scss';
-import type { IPacienteForm, IEventoCampo } from '../../../types/Paciente.types';
+import styles from './FormularioPaciente.module.scss';
+import type { IPacienteForm, IEventoCampo } from '../../types/Paciente.types';
 
 // Lista sugerida de obras sociales (misma que el backend en ObraSocial.const.ts).
 // A diferencia del schema, el frontend NO la impone: permite elegir una de

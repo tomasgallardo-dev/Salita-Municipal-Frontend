@@ -1,3 +1,6 @@
+// TablaPacientes - Tabla de pacientes con acciones Editar/Eliminar.
+// Se conecta con: ListaPacientes (padre).
+
 import { Table, Button } from 'react-bootstrap';
 import type { IPaciente } from '../../types/Paciente.types';
 

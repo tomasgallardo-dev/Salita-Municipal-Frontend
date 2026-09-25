@@ -1,13 +1,16 @@
+// FormularioPaciente - Alta y edicion de paciente: form completo, validaciones, checkbox 'sin numero' y edad en vivo.
+// Se conecta con: DatosPersonales, DireccionPaciente, TelefonoPaciente, ObraSocialPaciente, validaciones, JsonDebugger y API /pacientes.
+
 import { useState, useEffect, type ChangeEvent, type FormEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 import styles from './FormularioPaciente.module.scss';
-import JsonDebugger from '../utils/JsonDebugger';
+import JsonDebugger from '../utils/dev/JsonDebugger';
 import { validarDatos, type ReglasValidacion } from '../utils/validaciones';
-import DatosPersonales from './components/DatosPersonales';
-import DireccionPaciente from './components/DireccionPaciente';
-import TelefonoPaciente from './components/TelefonoPaciente';
-import ObraSocialPaciente from './components/ObraSocialPaciente';
+import DatosPersonales from './DatosPersonales';
+import DireccionPaciente from './DireccionPaciente';
+import TelefonoPaciente from './TelefonoPaciente';
+import ObraSocialPaciente from './ObraSocialPaciente';
 import clientesAxios from '../../config/axios_config';
 import type { IPacienteForm, IEventoCampo } from '../../types/Paciente.types';
 
